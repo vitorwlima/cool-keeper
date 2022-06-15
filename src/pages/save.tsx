@@ -77,7 +77,7 @@ const SavePassword: NextPage = () => {
             </label>
           </div>
           <button
-            className="btn btn-primary mt-6"
+            className={`btn btn-primary mt-6 ${isCreating ? 'loading' : ''}`}
             type="submit"
             disabled={!name || !login || !password || isCreating}
           >
