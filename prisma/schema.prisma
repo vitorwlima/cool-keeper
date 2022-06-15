@@ -12,5 +12,6 @@ generator client {
 model Password {
   id                 String @id @default(uuid())
   name               String
+  login              String
   encrypted_password String @db.Text
 }
