@@ -1,28 +1,17 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import { PasswordsList } from 'src/components/PasswordsList'
+import { getPasswords } from 'src/lib/prisma-helpers/getPasswords'
 
-const passwords = [
-  {
-    id: '1',
-    name: 'LinkedIn',
-    login: 'vitorwlima13@gmail.com',
-    decrypted_password: 'hello123',
-  },
-  {
-    id: '2',
-    name: 'Twitter',
-    login: 'vitor-teste@outlook.com',
-    decrypted_password: 'dsajipddsa80d8sa',
-  },
-  {
-    id: '3',
-    name: 'GitHub',
-    login: 'vitorwlima',
-    decrypted_password: '.dsa9dsa2_92-a',
-  },
-]
+type Props = {
+  passwords: {
+    id: string
+    name: string
+    login: string
+    decrypted_password: string
+  }[]
+}
 
-const MyKeeper: NextPage = () => {
+const MyKeeper: NextPage<Props> = ({ passwords }) => {
   return (
     <main>
       <section className="bg-primary text-primary-content flex flex-col items-center justify-center py-12">
@@ -35,6 +24,16 @@ const MyKeeper: NextPage = () => {
       </section>
     </main>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const passwords = await getPasswords()
+
+  return {
+    props: {
+      passwords,
+    },
+  }
 }
 
 export default MyKeeper
