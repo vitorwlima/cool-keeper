@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 const Home: NextPage = () => {
   const [passwords, setPasswords] = useState<
-    { id: string; encrypted_password: string; name: string }[]
+    { id: string; decrypted_password: string; name: string }[]
   >([])
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
           <div key={pass.id}>
             <div>id: {pass.id}</div>
             <div>name: {pass.name}</div>
-            <div>encrypted_password: {pass.encrypted_password}</div>
+            <div>encrypted_password: {pass.decrypted_password}</div>
           </div>
         ))}
       </div>
