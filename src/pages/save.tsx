@@ -1,18 +1,28 @@
+import axios from 'axios'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 
 const SavePassword: NextPage = () => {
+  const router = useRouter()
   const [name, setName] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSavePassword = (event: FormEvent<HTMLFormElement>) => {
+  const handleSavePassword = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const body = {
       name,
       login,
       password,
+    }
+
+    try {
+      await axios.post('/api/password', body)
+      router.push('/my-keeper')
+    } catch (err) {
+      console.log(err)
     }
   }
 
