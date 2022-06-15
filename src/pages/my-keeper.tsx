@@ -1,4 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { PasswordsList } from 'src/components/PasswordsList'
 import { getPasswords } from 'src/lib/prisma-helpers/getPasswords'
 
@@ -12,6 +13,12 @@ type Props = {
 }
 
 const MyKeeper: NextPage<Props> = ({ passwords }) => {
+  const router = useRouter()
+
+  const handleRedirectSaveNewPassword = () => {
+    router.push('/save')
+  }
+
   return (
     <main>
       <section className="bg-primary text-primary-content flex flex-col items-center justify-center py-12">
@@ -19,7 +26,15 @@ const MyKeeper: NextPage<Props> = ({ passwords }) => {
         <strong className="text-lg mt-2">Passwords are secured</strong>
       </section>
       <section className="p-4 max-w-5xl mx-auto">
-        <h2 className="font-semibold mb-4 text-lg">Passwords</h2>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="font-semibold text-lg">Passwords</h2>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleRedirectSaveNewPassword()}
+          >
+            Save new
+          </button>
+        </div>
         <PasswordsList passwords={passwords} />
       </section>
     </main>
