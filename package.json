@@ -15,7 +15,8 @@
     "daisyui": "^2.15.4",
     "next": "12.1.6",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-icons": "^4.4.0"
   },
   "devDependencies": {
     "@types/cryptr": "^4.0.1",
