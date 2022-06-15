@@ -8,8 +8,10 @@ const SavePassword: NextPage = () => {
   const [name, setName] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
+  const [isCreating, setIsCreating] = useState(false)
 
   const handleSavePassword = async (event: FormEvent<HTMLFormElement>) => {
+    setIsCreating(true)
     event.preventDefault()
 
     const body = {
@@ -23,6 +25,8 @@ const SavePassword: NextPage = () => {
       router.push('/my-keeper')
     } catch (err) {
       console.log(err)
+    } finally {
+      setIsCreating(false)
     }
   }
 
@@ -75,7 +79,7 @@ const SavePassword: NextPage = () => {
           <button
             className="btn btn-primary mt-6"
             type="submit"
-            disabled={!name || !login || !password}
+            disabled={!name || !login || !password || isCreating}
           >
             Save
           </button>
