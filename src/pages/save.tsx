@@ -31,9 +31,9 @@ const SavePassword: NextPage = () => {
       <section className="bg-primary text-primary-content flex flex-col items-center justify-center py-12">
         <strong className="text-lg mt-2">Save new password</strong>
       </section>
-      <section className="p-4">
+      <section className="p-4 max-w-5xl mx-auto">
         <form className="flex flex-col gap-3" onSubmit={handleSavePassword}>
-          <div className="form-control w-full max-w-lg">
+          <div className="form-control w-full">
             <label className="label flex flex-col items-start">
               <span className="label-text mb-2">Name</span>
               <input
@@ -46,7 +46,7 @@ const SavePassword: NextPage = () => {
               />
             </label>
           </div>
-          <div className="form-control w-full max-w-lg">
+          <div className="form-control w-full">
             <label className="label flex flex-col items-start">
               <span className="label-text mb-2">Login</span>
               <input
@@ -59,7 +59,7 @@ const SavePassword: NextPage = () => {
               />
             </label>
           </div>
-          <div className="form-control w-full max-w-lg">
+          <div className="form-control w-full">
             <label className="label flex flex-col items-start">
               <span className="label-text mb-2">Password</span>
               <input
