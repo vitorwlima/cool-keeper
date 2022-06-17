@@ -15,3 +15,12 @@ model Password {
   login              String
   encrypted_password String @db.Text
 }
+
+model User {
+  id           String @id @default(uuid())
+  name         String
+  login        String @unique
+  passwordHash String @map("password_hash")
+
+  @@map("users")
+}

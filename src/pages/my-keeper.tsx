@@ -1,4 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { PasswordsList } from 'src/components/PasswordsList'
 import { getPasswords } from 'src/lib/prisma-helpers/getPasswords'
@@ -41,7 +42,19 @@ const MyKeeper: NextPage<Props> = ({ passwords }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx)
+  const isAuthenticated = !!session?.user.id
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: '/',
+      },
+    }
+  }
+
   const passwords = await getPasswords()
 
   return {
