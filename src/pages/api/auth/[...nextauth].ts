@@ -51,5 +51,8 @@ export default NextAuth({
         }
       }
     }
+  },
+  pages: {
+    signIn: '/sign-in'
   }
 })

@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { getSession } from 'next-auth/react'
+import { getSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { PasswordsList } from 'src/components/PasswordsList'
 import { getPasswords } from 'src/lib/prisma-helpers/getPasswords'
@@ -20,8 +20,18 @@ const MyKeeper: NextPage<Props> = ({ passwords }) => {
     router.push('/save')
   }
 
+  const handleLogout = async () => {
+    await signOut({
+      redirect: false,
+    })
+    router.push('/')
+  }
+
   return (
     <main>
+      <button className="btn absolute top-2 right-2" onClick={handleLogout}>
+        Logout
+      </button>
       <section className="bg-primary text-primary-content flex flex-col items-center justify-center py-12">
         <h3 className="text-3xl">{passwords.length}</h3>
         <strong className="text-lg mt-2">Passwords are secured</strong>
@@ -45,7 +55,7 @@ const MyKeeper: NextPage<Props> = ({ passwords }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx)
   const isAuthenticated = !!session?.user.id
-
+  console.log({ isAuthenticated, session })
   if (!isAuthenticated) {
     return {
       redirect: {

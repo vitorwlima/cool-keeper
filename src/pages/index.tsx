@@ -1,23 +1,23 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { getSession, signIn, useSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react'
+import Link from 'next/link'
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession()
-
   return (
     <div>
       <h1>Landing page here</h1>
-      <button
-        onClick={() =>
-          signIn('credentials', {
-            login: 'vitorwlima13',
-            password: 'legalzaotop123',
-          })
-        }
-      >
-        Login
-      </button>
-      <div>name: {session?.user?.name}</div>
+      <div>
+        <Link href="/sign-in">
+          <a>
+            <span className="btn btn-primary">Sign In</span>
+          </a>
+        </Link>
+        <Link href="/register">
+          <a>
+            <span className="btn btn-secondary">Register now</span>
+          </a>
+        </Link>
+      </div>
     </div>
   )
 }
@@ -25,6 +25,7 @@ const Home: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx)
   const isAuthenticated = !!session?.user.id
+  console.log({ isAuthenticated, session })
 
   if (isAuthenticated) {
     return {
