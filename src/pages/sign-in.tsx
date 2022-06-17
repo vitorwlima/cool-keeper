@@ -24,7 +24,7 @@ const SignIn: NextPage = () => {
       return
     }
 
-    console.log('Wrong credentials. Try again.')
+    console.info('Wrong credentials. Try again.')
   }
 
   return (
@@ -41,7 +41,7 @@ const SignIn: NextPage = () => {
             <span className="label-text mb-2">Login</span>
             <input
               type="text"
-              placeholder="Login goes here"
+              placeholder="john.doe@example.com"
               className="input input-bordered w-full"
               name="login"
               value={login}
