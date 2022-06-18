@@ -41,9 +41,7 @@ Cool keeper is the modern password manager we have been looking for. Built using
 The following tools were used in this project:
 
 - [Next.js](https://nextjs.org/)
-- [React](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [TailwindCSS](https://tailwindcss.com/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Prisma](https://www.prisma.io/)
 - [tRPC](https://trpc.io/)
