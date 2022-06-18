@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import { notify } from 'src/utils/notify'
 import { trpc } from 'src/utils/trpc'
 
 const SavePassword: NextPage = () => {
@@ -14,6 +15,7 @@ const SavePassword: NextPage = () => {
 
   const { mutate, isLoading } = trpc.useMutation('passwords.create', {
     onSuccess: () => {
+      notify('success', 'Password saved successfully.')
       trpcContext.invalidateQueries(['passwords.get'])
       router.push('/')
     }

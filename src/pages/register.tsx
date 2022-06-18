@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import { notify } from 'src/utils/notify'
 import { trpc } from 'src/utils/trpc'
 
 const Register: NextPage = () => {
@@ -12,6 +13,7 @@ const Register: NextPage = () => {
 
   const { mutate } = trpc.useMutation('users.create', {
     onSuccess: () => {
+      notify('success', 'Account created successfully.')
       router.push('/sign-in')
     }
   })
@@ -20,7 +22,7 @@ const Register: NextPage = () => {
     event.preventDefault()
 
     if (password !== passwordConfirmation) {
-      console.info('Passwords do not match.')
+      notify('error', 'Passwords do not match.')
       return
     }
 
