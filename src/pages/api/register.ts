@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from 'src/lib/prisma'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { name, login, password } = req.body
     const salt = await bcrypt.genSalt(12)

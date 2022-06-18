@@ -22,7 +22,7 @@ const Register: NextPage = () => {
       await axios.post('/api/register', {
         name,
         login,
-        password,
+        password
       })
 
       router.push('/sign-in')

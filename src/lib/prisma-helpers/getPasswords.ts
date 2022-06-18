@@ -1,5 +1,5 @@
-import Cryptr from "cryptr"
-import { prisma } from "../prisma"
+import Cryptr from 'cryptr'
+import { prisma } from '../prisma'
 
 export const getPasswords = async (userId: string) => {
   const cryptr = new Cryptr(process.env.PASSWORD_HASH!)

@@ -30,13 +30,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       redirect: {
         destination: '/my-keeper',
-        permanent: true,
-      },
+        permanent: true
+      }
     }
   }
 
   return {
-    props: {},
+    props: {}
   }
 }
 

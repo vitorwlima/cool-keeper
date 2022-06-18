@@ -13,7 +13,7 @@ type Props = {
   }[]
 }
 
-const MyKeeper: NextPage<Props> = ({ passwords }) => {
+const MyKeeper: NextPage<Props> = ({ passwords }: Props) => {
   const router = useRouter()
 
   const handleRedirectSaveNewPassword = () => {
@@ -22,7 +22,7 @@ const MyKeeper: NextPage<Props> = ({ passwords }) => {
 
   const handleLogout = async () => {
     await signOut({
-      redirect: false,
+      redirect: false
     })
     window.location.reload()
   }
@@ -60,8 +60,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       redirect: {
         permanent: true,
-        destination: '/',
-      },
+        destination: '/'
+      }
     }
   }
 
@@ -69,8 +69,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      passwords,
-    },
+      passwords
+    }
   }
 }
 

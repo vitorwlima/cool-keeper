@@ -21,7 +21,7 @@ const SavePassword: NextPage = () => {
       name,
       login,
       password,
-      userId: session?.user.id,
+      userId: session?.user.id
     }
 
     try {
@@ -101,13 +101,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       redirect: {
         permanent: true,
-        destination: '/',
-      },
+        destination: '/'
+      }
     }
   }
 
   return {
-    props: {},
+    props: {}
   }
 }
 

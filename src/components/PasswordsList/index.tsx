@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { FiCopy } from 'react-icons/fi'
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
   }[]
 }
 
-export const PasswordsList: React.FC<Props> = ({ passwords }) => {
+export const PasswordsList: FC<Props> = ({ passwords }) => {
   if (passwords.length === 0) {
     return <p className="text-center text-xl">No saved passwords :(</p>
   }

@@ -1,8 +1,8 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from 'bcrypt'
-import NextAuth from "next-auth"
-import Credentials from "next-auth/providers/credentials"
-import { prisma } from "src/lib/prisma"
+import NextAuth from 'next-auth'
+import Credentials from 'next-auth/providers/credentials'
+import { prisma } from 'src/lib/prisma'
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -35,11 +35,11 @@ export default NextAuth({
         }
 
         return user
-      },
-    }),
+      }
+    })
   ],
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt'
   },
   callbacks: {
     session: ({ session, token }) => {

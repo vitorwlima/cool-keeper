@@ -1,10 +1,8 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { getSession, signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 
 const SignIn: NextPage = () => {
-  const router = useRouter()
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
 
@@ -14,7 +12,7 @@ const SignIn: NextPage = () => {
     const res: any = await signIn('credentials', {
       login,
       password,
-      redirect: false,
+      redirect: false
     })
 
     if (res.ok) {
@@ -74,13 +72,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       redirect: {
         destination: '/my-keeper',
-        permanent: true,
-      },
+        permanent: true
+      }
     }
   }
 
   return {
-    props: {},
+    props: {}
   }
 }
 
