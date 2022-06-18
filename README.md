@@ -1,34 +1,97 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center" id="top"> 
+  <img src="./.github/app.gif" alt="Cool Keeper" />
 
-## Getting Started
+  &#xa0;
 
-First, run the development server:
+  <!-- <a href="https://coolkeeper.netlify.app">Demo</a> -->
+</div>
+
+<h1 align="center">Cool Keeper</h1>
+
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/vitorwlima/cool-keeper?color=56BEB8">
+
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/vitorwlima/cool-keeper?color=56BEB8">
+
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/vitorwlima/cool-keeper?color=56BEB8">
+
+  <img alt="License" src="https://img.shields.io/github/license/vitorwlima/cool-keeper?color=56BEB8">
+
+  <img alt="Github issues" src="https://img.shields.io/github/issues/vitorwlima/cool-keeper?color=56BEB8" />
+
+  <img alt="Github forks" src="https://img.shields.io/github/forks/vitorwlima/cool-keeper?color=56BEB8" />
+
+  <img alt="Github stars" src="https://img.shields.io/github/stars/vitorwlima/cool-keeper?color=56BEB8" />
+</p>
+
+<!-- Status -->
+
+<!-- <h4 align="center"> 
+	🚧  Cool Keeper 🚀 Under construction...  🚧
+</h4> 
+
+<hr> -->
+
+## :dart: About ##
+
+Cool keeper is the modern password manager we have been looking for. Built using the latest technologies from the web development world, it's goal is to provide the users a safe place to store their passwords with a great UX and beautiful UI (work in progress). The idea is to achieve this by building a highly interactive open source environment where people can contribute adding features and fixing bugs.
+
+## :rocket: Technologies ##
+
+The following tools were used in this project:
+
+- [Next.js](https://nextjs.org/)
+- [React](https://pt-br.reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Prisma](https://www.prisma.io/)
+- [tRPC](https://trpc.io/)
+- [Planetscale](https://planetscale.com/)
+- [NextAuth](https://next-auth.js.org/)
+
+## :white_check_mark: Requirements ##
+
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com), [Node](https://nodejs.org/en/) and [PnpM](https://pnpm.io/) installed.
+
+## :checkered_flag: Contributing ##
+
+Clone the project:
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Clone this project
+$ git clone https://github.com/vitorwlima/cool-keeper
+
+# Access
+$ cd cool-keeper
+
+# Install dependencies
+$ pnpm install
+
+# Run the project
+$ pnpm run dev
+
+# The server will initialize in the <http://localhost:3000>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Setup your .env file:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```typescript
+DATABASE_URL=your_planetscale_db_url
+PASSWORD_HASH=random_string
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+> The DB section is optional, and you can make it run locally while developing if that is better for you.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+After that, you are ready to start working on the project. Feel free to pick any open issues or open new ones that you feel are important. The flow is standard: you need to create a separate branch and then create a pull request into `main` branch. Also, when commiting it is recommended to use [this convention](https://dev.to/i5han3/git-commit-message-convention-that-you-can-follow-1709).
 
-## Learn More
+## :memo: License ##
 
-To learn more about Next.js, take a look at the following resources:
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Made with :heart: by <a href="https://github.com/vitorwlima" target="_blank">Vitor Lima</a>
 
-## Deploy on Vercel
+&#xa0;
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<a href="#top">Back to top</a>
