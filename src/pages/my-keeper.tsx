@@ -24,7 +24,7 @@ const MyKeeper: NextPage<Props> = ({ passwords }) => {
     await signOut({
       redirect: false,
     })
-    router.push('/')
+    window.location.reload()
   }
 
   return (
@@ -55,7 +55,7 @@ const MyKeeper: NextPage<Props> = ({ passwords }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx)
   const isAuthenticated = !!session?.user.id
-  console.log({ isAuthenticated, session })
+
   if (!isAuthenticated) {
     return {
       redirect: {

@@ -28,7 +28,7 @@ const SavePassword: NextPage = () => {
       await axios.post('/api/password', body)
       router.push('/my-keeper')
     } catch (err) {
-      console.log(err)
+      console.info(err)
     } finally {
       setIsCreating(false)
     }
