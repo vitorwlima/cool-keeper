@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  const passwords = await getPasswords()
+  const passwords = await getPasswords(session.user.id)
 
   return {
     props: {

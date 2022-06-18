@@ -1,5 +1,6 @@
 import axios from 'axios'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
+import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 
@@ -10,6 +11,8 @@ const SavePassword: NextPage = () => {
   const [password, setPassword] = useState('')
   const [isCreating, setIsCreating] = useState(false)
 
+  const { data: session } = useSession()
+
   const handleSavePassword = async (event: FormEvent<HTMLFormElement>) => {
     setIsCreating(true)
     event.preventDefault()
@@ -18,6 +21,7 @@ const SavePassword: NextPage = () => {
       name,
       login,
       password,
+      userId: session?.user.id,
     }
 
     try {
@@ -87,6 +91,24 @@ const SavePassword: NextPage = () => {
       </section>
     </main>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx)
+  const isAuthenticated = !!session?.user.id
+
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: '/',
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
 
 export default SavePassword
