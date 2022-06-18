@@ -1,37 +1,33 @@
-import axios from 'axios'
 import type { GetServerSideProps, NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import { trpc } from 'src/lib/trpc'
 
 const SavePassword: NextPage = () => {
   const router = useRouter()
+  const { data: session } = useSession()
+  const trpcContext = trpc.useContext()
   const [name, setName] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-  const [isCreating, setIsCreating] = useState(false)
 
-  const { data: session } = useSession()
+  const { mutate, isLoading } = trpc.useMutation('passwords.create', {
+    onSuccess: () => {
+      trpcContext.invalidateQueries(['passwords.get'])
+      router.push('/')
+    }
+  })
 
   const handleSavePassword = async (event: FormEvent<HTMLFormElement>) => {
-    setIsCreating(true)
     event.preventDefault()
 
-    const body = {
-      name,
+    mutate({
       login,
+      name,
       password,
-      userId: session?.user.id
-    }
-
-    try {
-      await axios.post('/api/password', body)
-      router.push('/my-keeper')
-    } catch (err) {
-      console.info(err)
-    } finally {
-      setIsCreating(false)
-    }
+      userId: session?.user.id || ''
+    })
   }
 
   return (
@@ -81,9 +77,9 @@ const SavePassword: NextPage = () => {
             </label>
           </div>
           <button
-            className={`btn btn-primary mt-6 ${isCreating ? 'loading' : ''}`}
+            className={`btn btn-primary mt-6 ${isLoading ? 'loading' : ''}`}
             type="submit"
-            disabled={!name || !login || !password || isCreating}
+            disabled={!name || !login || !password || isLoading}
           >
             Save
           </button>

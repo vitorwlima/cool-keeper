@@ -22,4 +22,24 @@ export const passwordsRouter = createRouter()
 
       return passwords
     }
+  }).mutation('create', {
+    input: z.object({
+      name: z.string(),
+      login: z.string(),
+      password: z.string(),
+      userId: z.string()
+    }),
+    resolve: async ({ input }) => {
+      const cryptr = new Cryptr(process.env.PASSWORD_HASH!)
+      const { name, login, password, userId } = input
+      const encryptedPassword = cryptr.encrypt(password)
+      await prisma.password.create({
+        data: {
+          encrypted_password: encryptedPassword,
+          name,
+          login,
+          userId
+        }
+      })
+    }
   })
