@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
-import { trpc } from 'src/lib/trpc'
+import { trpc } from 'src/utils/trpc'
 
 const SavePassword: NextPage = () => {
   const router = useRouter()

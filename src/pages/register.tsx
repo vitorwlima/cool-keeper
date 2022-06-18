@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
-import { trpc } from 'src/lib/trpc'
+import { trpc } from 'src/utils/trpc'
 
 const Register: NextPage = () => {
   const router = useRouter()

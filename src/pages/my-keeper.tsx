@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import { getSession, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { PasswordsList } from 'src/components/PasswordsList'
-import { trpc } from 'src/lib/trpc'
+import { trpc } from 'src/utils/trpc'
 
 const MyKeeper: NextPage = () => {
   const { data: session } = useSession()
@@ -20,6 +20,7 @@ const MyKeeper: NextPage = () => {
     await signOut({
       redirect: false
     })
+
     window.location.reload()
   }
 

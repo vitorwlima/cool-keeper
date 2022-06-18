@@ -1,6 +1,6 @@
 import Cryptr from 'cryptr'
-import { prisma } from 'src/lib/prisma'
 import { z } from 'zod'
+import { prisma } from '../db/prisma'
 import { createRouter } from './context'
 
 export const passwordsRouter = createRouter()
