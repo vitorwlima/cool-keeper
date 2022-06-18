@@ -1,7 +1,7 @@
-import axios from 'axios'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import { trpc } from 'src/lib/trpc'
 
 const Register: NextPage = () => {
   const router = useRouter()
@@ -9,6 +9,12 @@ const Register: NextPage = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+
+  const { mutate } = trpc.useMutation('users.create', {
+    onSuccess: () => {
+      router.push('/sign-in')
+    }
+  })
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -18,17 +24,11 @@ const Register: NextPage = () => {
       return
     }
 
-    try {
-      await axios.post('/api/register', {
-        name,
-        login,
-        password
-      })
-
-      router.push('/sign-in')
-    } catch (err) {
-      console.info('Register error:', err)
-    }
+    mutate({
+      name,
+      login,
+      password
+    })
   }
 
   return (
