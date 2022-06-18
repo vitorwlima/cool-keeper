@@ -1,20 +1,16 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { getSession, signOut } from 'next-auth/react'
+import { getSession, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { PasswordsList } from 'src/components/PasswordsList'
-import { getPasswords } from 'src/lib/prisma-helpers/getPasswords'
+import { trpc } from 'src/lib/trpc'
 
-type Props = {
-  passwords: {
-    id: string
-    name: string
-    login: string
-    decrypted_password: string
-  }[]
-}
-
-const MyKeeper: NextPage<Props> = ({ passwords }: Props) => {
+const MyKeeper: NextPage = () => {
+  const { data: session } = useSession()
   const router = useRouter()
+  const { data: passwords, isLoading, error } = trpc.useQuery(['passwords.get', { userId: session?.user.id || '' }])
+
+  if (error) return <div>An error has occurred. Try again later.</div>
+  if (!passwords || isLoading) return <div>Loading...</div>
 
   const handleRedirectSaveNewPassword = () => {
     router.push('/save')
@@ -65,12 +61,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  const passwords = await getPasswords(session.user.id)
-
   return {
-    props: {
-      passwords
-    }
+    props: {}
   }
 }
 
