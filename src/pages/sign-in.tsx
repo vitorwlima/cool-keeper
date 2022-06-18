@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { getSession, signIn } from 'next-auth/react'
 import { FormEvent, useState } from 'react'
+import { notify } from 'src/utils/notify'
 
 const SignIn: NextPage = () => {
   const [login, setLogin] = useState('')
@@ -20,7 +21,7 @@ const SignIn: NextPage = () => {
       return
     }
 
-    console.info('Wrong credentials. Try again.')
+    notify('error', 'Wrong credentials. Try again.')
   }
 
   return (
