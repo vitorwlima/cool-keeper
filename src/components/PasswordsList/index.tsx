@@ -1,13 +1,9 @@
 import { FC } from 'react'
 import { FiCopy } from 'react-icons/fi'
+import { inferQueryResponse } from 'src/pages/api/trpc/[trpc]'
 
 type Props = {
-  passwords: {
-    id: string
-    name: string
-    login: string
-    decrypted_password: string
-  }[]
+  passwords: inferQueryResponse<'passwords.get'>
 }
 
 export const PasswordsList: FC<Props> = ({ passwords }) => {
