@@ -34,7 +34,7 @@ const MyKeeper: NextPage = () => {
 
       <main>
         <button className="btn absolute top-2 right-2" onClick={handleLogout}>
-        Logout
+          Logout
         </button>
         <section className="bg-primary text-primary-content flex flex-col items-center justify-center py-12">
           <h3 className="text-3xl">{passwords.length}</h3>
@@ -47,7 +47,7 @@ const MyKeeper: NextPage = () => {
               className="btn btn-primary"
               onClick={() => handleRedirectSaveNewPassword()}
             >
-            Save new
+              Save new
             </button>
           </div>
           <PasswordsList passwords={passwords} />

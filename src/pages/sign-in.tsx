@@ -1,15 +1,24 @@
+import { FormHandles, SubmitHandler } from '@unform/core'
+import { Form } from '@unform/web'
 import type { GetServerSideProps, NextPage } from 'next'
 import { getSession, signIn } from 'next-auth/react'
 import Head from 'next/head'
-import { FormEvent, useState } from 'react'
-import { notify } from 'src/utils/notify'
+import { useRef, useState } from 'react'
+import { Input } from 'src/components/Input'
+
+type FormData = {
+  login: string
+  password: string
+}
 
 const SignIn: NextPage = () => {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const formRef = useRef<FormHandles>(null)
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const handleSubmit: SubmitHandler<FormData> = async (data) => {
+    const { login, password } = data
+    setIsLoggingIn(true)
+    formRef.current?.setErrors({})
 
     const res: any = await signIn('credentials', {
       login,
@@ -17,12 +26,16 @@ const SignIn: NextPage = () => {
       redirect: false
     })
 
+    setIsLoggingIn(false)
+
     if (res.ok) {
       window.location.reload()
       return
     }
 
-    notify('error', 'Wrong credentials. Try again.')
+    formRef.current?.setErrors({
+      password: 'Invalid login or password.'
+    })
   }
 
   return (
@@ -40,33 +53,23 @@ const SignIn: NextPage = () => {
           <h1 className="text-center mt-4 mb-12 text-xl">Sign in now</h1>
         </section>
         <section>
-          <form className="max-w-5xl mx-auto" onSubmit={handleSubmit}>
-            <label className="label flex flex-col items-start">
-              <span className="label-text mb-2">Login</span>
-              <input
-                type="text"
-                placeholder="john.doe@example.com"
-                className="input input-bordered w-full"
-                name="login"
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
-              />
-            </label>
-            <label className="label flex flex-col items-start">
-              <span className="label-text mb-2">Password</span>
-              <input
-                type="password"
-                placeholder="********"
-                className="input input-bordered w-full"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            <button type="submit" className="btn btn-primary w-full mt-8">
-            Sign In
+          <Form className="max-w-5xl mx-auto flex flex-col gap-2" ref={formRef} onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="john.doe@example.com"
+              name="login"
+              label="Login"
+            />
+            <Input
+              type="password"
+              placeholder="********"
+              name="password"
+              label="Password"
+            />
+            <button type="submit" className={`btn btn-primary w-full mt-8 ${isLoggingIn ? 'loading' : ''}`}>
+              Sign In
             </button>
-          </form>
+          </Form>
         </section>
       </main>
     </>
