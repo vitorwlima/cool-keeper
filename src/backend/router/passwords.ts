@@ -42,4 +42,15 @@ export const passwordsRouter = createRouter()
         }
       })
     }
+  }).mutation('delete', {
+    input: z.object({
+      passwordId: z.string()
+    }),
+    resolve: async ({ input }) => {
+      await prisma.password.delete({
+        where: {
+          id: input.passwordId
+        }
+      })
+    }
   })
