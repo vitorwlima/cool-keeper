@@ -1,10 +1,11 @@
 import { FormHandles, SubmitHandler } from '@unform/core'
 import { Form } from '@unform/web'
 import type { GetServerSideProps, NextPage } from 'next'
-import { getSession, signIn } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import Head from 'next/head'
 import { useRef, useState } from 'react'
 import { Input } from 'src/components/Input'
+import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 
 type FormData = {
   login: string
@@ -77,21 +78,7 @@ const SignIn: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  const isAuthenticated = !!session?.user.id
-
-  if (isAuthenticated) {
-    return {
-      redirect: {
-        destination: '/my-keeper',
-        permanent: true
-      }
-    }
-  }
-
-  return {
-    props: {}
-  }
+  return setAuthLevelToRoute('guest', ctx)
 }
 
 export default SignIn

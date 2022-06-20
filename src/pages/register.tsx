@@ -1,11 +1,12 @@
 import { FormHandles, SubmitHandler } from '@unform/core'
 import { Form } from '@unform/web'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { Input } from 'src/components/Input'
 import { notify } from 'src/utils/notify'
+import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 import { trpc } from 'src/utils/trpc'
 
 type FormData = {
@@ -93,6 +94,10 @@ const Register: NextPage = () => {
       </main>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return setAuthLevelToRoute('guest', ctx)
 }
 
 export default Register

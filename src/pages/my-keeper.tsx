@@ -1,8 +1,9 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { getSession, signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { PasswordsList } from 'src/components/PasswordsList'
+import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 import { trpc } from 'src/utils/trpc'
 
 const MyKeeper: NextPage = () => {
@@ -58,21 +59,7 @@ const MyKeeper: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  const isAuthenticated = !!session?.user.id
-
-  if (!isAuthenticated) {
-    return {
-      redirect: {
-        permanent: true,
-        destination: '/'
-      }
-    }
-  }
-
-  return {
-    props: {}
-  }
+  return setAuthLevelToRoute('auth', ctx)
 }
 
 export default MyKeeper

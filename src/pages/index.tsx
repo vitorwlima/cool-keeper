@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { getSession } from 'next-auth/react'
 import Link from 'next/link'
+import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 
 const Home: NextPage = () => {
   return (
@@ -23,21 +23,7 @@ const Home: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  const isAuthenticated = !!session?.user.id
-
-  if (isAuthenticated) {
-    return {
-      redirect: {
-        destination: '/my-keeper',
-        permanent: true
-      }
-    }
-  }
-
-  return {
-    props: {}
-  }
+  return setAuthLevelToRoute('guest', ctx)
 }
 
 export default Home

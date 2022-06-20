@@ -1,12 +1,13 @@
 import { FormHandles, SubmitHandler } from '@unform/core'
 import { Form } from '@unform/web'
 import type { GetServerSideProps, NextPage } from 'next'
-import { getSession, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { Input } from 'src/components/Input'
 import { notify } from 'src/utils/notify'
+import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 import { trpc } from 'src/utils/trpc'
 
 type FormData = {
@@ -94,21 +95,7 @@ const SavePassword: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  const isAuthenticated = !!session?.user.id
-
-  if (!isAuthenticated) {
-    return {
-      redirect: {
-        permanent: true,
-        destination: '/'
-      }
-    }
-  }
-
-  return {
-    props: {}
-  }
+  return setAuthLevelToRoute('auth', ctx)
 }
 
 export default SavePassword
