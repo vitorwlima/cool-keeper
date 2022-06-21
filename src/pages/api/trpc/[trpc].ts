@@ -5,7 +5,7 @@ import { createContext } from 'src/backend/router/context'
 
 export default trpcNext.createNextApiHandler({
   router: appRouter,
-  createContext
+  createContext,
 })
 
 export type inferQueryResponse<

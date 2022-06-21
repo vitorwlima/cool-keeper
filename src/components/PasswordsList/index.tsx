@@ -30,7 +30,7 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
       setEditingPassword(undefined)
       notify('success', 'Password deleted successfully.')
       trpcContext.invalidateQueries('passwords.get')
-    }
+    },
   })
 
   const { mutate: updateMutate } = trpc.useMutation('passwords.update', {
@@ -38,7 +38,7 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
       setEditingPassword(data)
       notify('success', 'Password updated successfully.')
       trpcContext.invalidateQueries('passwords.get')
-    }
+    },
   })
 
   const handleSetEditingPassword = (password: Password) => {
@@ -54,7 +54,10 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
     deleteMutate({ passwordId: editingPassword!.id })
   }
 
-  const handleCopyPassword = (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>, password: string) => {
+  const handleCopyPassword = (
+    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+    password: string,
+  ) => {
     event.stopPropagation()
     navigator.clipboard.writeText(password)
   }
@@ -68,29 +71,30 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
   }
 
   return (
-    <div className="flex gap-20">
+    <div className='flex gap-20'>
       <section className={`flex-1 lg:block ${editingPassword ? 'hidden' : ''}`}>
-        <header className="flex items-center justify-between mb-8">
-          <h2 className="font-semibold text-lg">Passwords</h2>
-          <button
-            className="btn btn-primary"
-            onClick={() => handleRedirectSaveNewPassword()}
-          >
+        <header className='flex items-center justify-between mb-8'>
+          <h2 className='font-semibold text-lg'>Passwords</h2>
+          <button className='btn btn-primary' onClick={() => handleRedirectSaveNewPassword()}>
             Save new
           </button>
         </header>
-        <ul className="flex flex-col gap-4 overflow-y-scroll max-h-[calc(100vh_-_306px)] pr-4 scrollbar-thumb-zinc-800 scrollbar-thin">
-          {passwords.length
-            ? passwords.map((password) => (
-              <li className="shadow-xl cursor-pointer" key={password.id} onClick={() => handleSetEditingPassword(password)}>
-                <div className="flex p-4 justify-between w-full">
+        <ul className='flex flex-col gap-4 overflow-y-scroll max-h-[calc(100vh_-_306px)] pr-4 scrollbar-thumb-zinc-800 scrollbar-thin'>
+          {passwords.length ? (
+            passwords.map((password) => (
+              <li
+                className='shadow-xl cursor-pointer'
+                key={password.id}
+                onClick={() => handleSetEditingPassword(password)}
+              >
+                <div className='flex p-4 justify-between w-full'>
                   <div>
-                    <h4 className="card-title">{password.name}</h4>
+                    <h4 className='card-title'>{password.name}</h4>
                     <p>{password.login}</p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className='flex gap-2'>
                     <button
-                      className="btn btn-primary"
+                      className='btn btn-primary'
                       onClick={(e) => handleCopyPassword(e, password.decrypted_password)}
                     >
                       <FiCopy />
@@ -99,14 +103,18 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
                 </div>
               </li>
             ))
-            : <p className="text-center text-xl">No saved passwords :(</p>}
+          ) : (
+            <p className='text-center text-xl'>No saved passwords :(</p>
+          )}
         </ul>
       </section>
-      {!!editingPassword &&
+      {!!editingPassword && (
         <section className='flex-1'>
-          <header className="mb-4 flex items-center justify-between">
-            <p className="text-2xl font-bold">{editingPassword.name}</p>
-            <button className="btn lg:hidden" onClick={() => setEditingPassword(undefined)}>Back</button>
+          <header className='mb-4 flex items-center justify-between'>
+            <p className='text-2xl font-bold'>{editingPassword.name}</p>
+            <button className='btn lg:hidden' onClick={() => setEditingPassword(undefined)}>
+              Back
+            </button>
           </header>
           <PasswordForm
             formRef={formRef}
@@ -117,7 +125,7 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
             onDeletePassword={handleDeletePassword}
           />
         </section>
-      }
+      )}
     </div>
   )
 }

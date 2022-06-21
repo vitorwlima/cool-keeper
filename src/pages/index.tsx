@@ -7,14 +7,14 @@ const Home: NextPage = () => {
     <div>
       <h1>Landing page here</h1>
       <div>
-        <Link href="/sign-in">
+        <Link href='/sign-in'>
           <a>
-            <span className="btn btn-primary">Sign In</span>
+            <span className='btn btn-primary'>Sign In</span>
           </a>
         </Link>
-        <Link href="/register">
+        <Link href='/register'>
           <a>
-            <span className="btn btn-secondary">Register now</span>
+            <span className='btn btn-secondary'>Register now</span>
           </a>
         </Link>
       </div>

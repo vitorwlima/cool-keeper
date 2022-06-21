@@ -5,7 +5,7 @@ export async function createContext (opts?: trpcNext.CreateNextContextOptions) {
   return { token: opts?.req.cookies['poll-token'], req: opts?.req }
 }
 
-type Context = trpc.inferAsyncReturnType<typeof createContext>;
+type Context = trpc.inferAsyncReturnType<typeof createContext>
 
 export function createRouter () {
   return trpc.router<Context>()

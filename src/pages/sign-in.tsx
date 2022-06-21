@@ -24,7 +24,7 @@ const SignIn: NextPage = () => {
     const res: any = await signIn('credentials', {
       login,
       password,
-      redirect: false
+      redirect: false,
     })
 
     setIsLoggingIn(false)
@@ -35,7 +35,7 @@ const SignIn: NextPage = () => {
     }
 
     formRef.current?.setErrors({
-      password: 'Invalid login or password.'
+      password: 'Invalid login or password.',
     })
   }
 
@@ -47,27 +47,24 @@ const SignIn: NextPage = () => {
       </Head>
 
       <main>
-        <section className="bg-primary text-primary-content flex flex-col items-center justify-center py-12">
-          <strong className="text-4xl mt-2">Cool Keeper</strong>
+        <section className='bg-primary text-primary-content flex flex-col items-center justify-center py-12'>
+          <strong className='text-4xl mt-2'>Cool Keeper</strong>
         </section>
         <section>
-          <h1 className="text-center mt-4 mb-12 text-xl">Sign in now</h1>
+          <h1 className='text-center mt-4 mb-12 text-xl'>Sign in now</h1>
         </section>
         <section>
-          <Form className="max-w-5xl mx-auto flex flex-col gap-2" ref={formRef} onSubmit={handleSubmit}>
-            <Input
-              type="text"
-              placeholder="john.doe@example.com"
-              name="login"
-              label="Login"
-            />
-            <Input
-              type="password"
-              placeholder="********"
-              name="password"
-              label="Password"
-            />
-            <button type="submit" className={`btn btn-primary w-full mt-8 ${isLoggingIn ? 'loading' : ''}`}>
+          <Form
+            className='max-w-5xl mx-auto flex flex-col gap-2'
+            ref={formRef}
+            onSubmit={handleSubmit}
+          >
+            <Input type='text' placeholder='john.doe@example.com' name='login' label='Login' />
+            <Input type='password' placeholder='********' name='password' label='Password' />
+            <button
+              type='submit'
+              className={`btn btn-primary w-full mt-8 ${isLoggingIn ? 'loading' : ''}`}
+            >
               Sign In
             </button>
           </Form>

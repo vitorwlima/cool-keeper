@@ -24,7 +24,7 @@ const Register: NextPage = () => {
     onSuccess: () => {
       notify('success', 'Account created successfully.')
       router.push('/sign-in')
-    }
+    },
   })
 
   const handleSubmit: SubmitHandler<FormData> = (data) => {
@@ -33,7 +33,7 @@ const Register: NextPage = () => {
 
     if (password !== passwordConfirmation) {
       formRef.current?.setErrors({
-        passwordConfirmation: 'Passwords do not match.'
+        passwordConfirmation: 'Passwords do not match.',
       })
 
       return
@@ -42,7 +42,7 @@ const Register: NextPage = () => {
     mutate({
       name,
       login,
-      password
+      password,
     })
   }
 
@@ -54,39 +54,31 @@ const Register: NextPage = () => {
       </Head>
 
       <main>
-        <section className="bg-secondary text-secondary-content flex flex-col items-center justify-center py-12">
-          <strong className="text-4xl mt-2">Cool Keeper</strong>
+        <section className='bg-secondary text-secondary-content flex flex-col items-center justify-center py-12'>
+          <strong className='text-4xl mt-2'>Cool Keeper</strong>
         </section>
         <section>
-          <h1 className="text-center mt-4 mb-12 text-xl">Register now</h1>
+          <h1 className='text-center mt-4 mb-12 text-xl'>Register now</h1>
         </section>
         <section>
-          <Form className="max-w-5xl mx-auto flex flex-col gap-2" ref={formRef} onSubmit={handleSubmit}>
+          <Form
+            className='max-w-5xl mx-auto flex flex-col gap-2'
+            ref={formRef}
+            onSubmit={handleSubmit}
+          >
+            <Input type='text' placeholder='john.doe@example.com' name='login' label='Login' />
+            <Input type='text' placeholder='John Doe' name='name' label='Name' />
+            <Input type='password' placeholder='********' name='password' label='Password' />
             <Input
-              type="text"
-              placeholder="john.doe@example.com"
-              name="login"
-              label='Login'
-            />
-            <Input
-              type="text"
-              placeholder="John Doe"
-              name="name"
-              label='Name'
-            />
-            <Input
-              type="password"
-              placeholder="********"
-              name="password"
-              label='Password'
-            />
-            <Input
-              type="password"
-              placeholder="********"
-              name="passwordConfirmation"
+              type='password'
+              placeholder='********'
+              name='passwordConfirmation'
               label='Password Confirmation'
             />
-            <button type="submit" className={`btn btn-secondary w-full mt-8 ${isLoading ? 'loading' : ''}`}>
+            <button
+              type='submit'
+              className={`btn btn-secondary w-full mt-8 ${isLoading ? 'loading' : ''}`}
+            >
               Create account
             </button>
           </Form>

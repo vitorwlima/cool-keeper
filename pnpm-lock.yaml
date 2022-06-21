@@ -22,6 +22,7 @@ specifiers:
   cryptr: ^6.0.3
   daisyui: ^2.15.4
   eslint: 8.0.1
+  eslint-config-prettier: ^8.5.0
   eslint-config-standard: ^17.0.0
   eslint-plugin-import: 2.25.2
   eslint-plugin-n: 15.0.0
@@ -77,6 +78,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.28.0_m2l4u43prldju63hje6u2e2pxi
   autoprefixer: 10.4.7_postcss@8.4.14
   eslint: 8.0.1
+  eslint-config-prettier: 8.5.0_eslint@8.0.1
   eslint-config-standard: 17.0.0_e6qfl5pmxsyfuxbbac4tyvigc4
   eslint-plugin-import: 2.25.2_vmcz2nbrkqnaepj4ivgdkrqxbu
   eslint-plugin-n: 15.0.0_eslint@8.0.1
@@ -1180,6 +1182,15 @@ packages:
   /escape-string-regexp/4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+    dev: true
+
+  /eslint-config-prettier/8.5.0_eslint@8.0.1:
+    resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.0.1
     dev: true
 
   /eslint-config-standard/17.0.0_e6qfl5pmxsyfuxbbac4tyvigc4:

@@ -9,4 +9,4 @@ export const appRouter = createRouter()
   .merge('passwords.', passwordsRouter)
   .merge('users.', usersRouter)
 
-export type AppRouter = typeof appRouter;
+export type AppRouter = typeof appRouter

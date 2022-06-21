@@ -12,6 +12,6 @@ export const notify = (type: Notification, message: string, options?: ToastOptio
     draggable: true,
     progress: undefined,
     theme: 'colored',
-    ...options
+    ...options,
   })
 }

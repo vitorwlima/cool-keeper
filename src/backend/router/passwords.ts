@@ -6,28 +6,28 @@ import { createRouter } from './context'
 export const passwordsRouter = createRouter()
   .query('get', {
     input: z.object({
-      userId: z.string()
+      userId: z.string(),
     }),
     resolve: async ({ input }) => {
       const cryptr = new Cryptr(process.env.PASSWORD_HASH!)
       const encryptedPasswords = await prisma.password.findMany({
         where: {
-          userId: input.userId
-        }
+          userId: input.userId,
+        },
       })
       const passwords = encryptedPasswords.map(pass => ({
         ...pass,
-        decrypted_password: cryptr.decrypt(pass.encrypted_password)
+        decrypted_password: cryptr.decrypt(pass.encrypted_password),
       }))
 
       return passwords
-    }
+    },
   }).mutation('create', {
     input: z.object({
       name: z.string(),
       login: z.string(),
       password: z.string(),
-      userId: z.string()
+      userId: z.string(),
     }),
     resolve: async ({ input }) => {
       const cryptr = new Cryptr(process.env.PASSWORD_HASH!)
@@ -38,16 +38,16 @@ export const passwordsRouter = createRouter()
           encrypted_password: encryptedPassword,
           name,
           login,
-          userId
-        }
+          userId,
+        },
       })
-    }
+    },
   }).mutation('update', {
     input: z.object({
       name: z.string(),
       login: z.string(),
       password: z.string(),
-      id: z.string()
+      id: z.string(),
     }),
     resolve: async ({ input }) => {
       const cryptr = new Cryptr(process.env.PASSWORD_HASH!)
@@ -55,26 +55,26 @@ export const passwordsRouter = createRouter()
       const encryptedPassword = cryptr.encrypt(password)
       const updatedPassword = await prisma.password.update({
         where: {
-          id
+          id,
         },
         data: {
           encrypted_password: encryptedPassword,
           name,
-          login
-        }
+          login,
+        },
       })
       const decryptedPassword = cryptr.decrypt(updatedPassword.encrypted_password)
       return { ...updatedPassword, decrypted_password: decryptedPassword }
-    }
+    },
   }).mutation('delete', {
     input: z.object({
-      passwordId: z.string()
+      passwordId: z.string(),
     }),
     resolve: async ({ input }) => {
       await prisma.password.delete({
         where: {
-          id: input.passwordId
-        }
+          id: input.passwordId,
+        },
       })
-    }
+    },
   })

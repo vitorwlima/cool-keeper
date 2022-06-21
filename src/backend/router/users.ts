@@ -8,7 +8,7 @@ export const usersRouter = createRouter()
     input: z.object({
       name: z.string(),
       login: z.string(),
-      password: z.string()
+      password: z.string(),
     }),
     resolve: async ({ input }) => {
       const { name, login, password } = input
@@ -18,8 +18,8 @@ export const usersRouter = createRouter()
         data: {
           name,
           login,
-          passwordHash
-        }
+          passwordHash,
+        },
       })
-    }
+    },
   })

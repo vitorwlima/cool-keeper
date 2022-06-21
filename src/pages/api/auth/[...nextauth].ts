@@ -11,7 +11,7 @@ export default NextAuth({
       name: 'credentials',
       credentials: {
         login: { label: 'Login', type: 'text', placeholder: 'JohnDoe123' },
-        password: { label: 'Password', type: 'password', placeholder: '********' }
+        password: { label: 'Password', type: 'password', placeholder: '********' },
       },
       authorize: async (credentials, req) => {
         if (!credentials?.login || !credentials?.password) {
@@ -20,8 +20,8 @@ export default NextAuth({
 
         const user = await prisma.user.findUnique({
           where: {
-            login: credentials.login
-          }
+            login: credentials.login,
+          },
         })
 
         if (!user) {
@@ -35,11 +35,11 @@ export default NextAuth({
         }
 
         return user
-      }
-    })
+      },
+    }),
   ],
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
   },
   callbacks: {
     session: ({ session, token }) => {
@@ -47,12 +47,12 @@ export default NextAuth({
         ...session,
         user: {
           name: session.user.name,
-          id: token.sub as string
-        }
+          id: token.sub as string,
+        },
       }
-    }
+    },
   },
   pages: {
-    signIn: '/sign-in'
-  }
+    signIn: '/sign-in',
+  },
 })

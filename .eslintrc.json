@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "standard"],
+  "extends": ["plugin:react/recommended", "standard", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,6 +16,10 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "indent": ["error", 2]
+    "jsx-quotes": ["error", "prefer-single"],
+    "max-len": ["error", { "code": 100, "ignorePattern": "className" }],
+    "comma-dangle": [2, "always-multiline"],
+    "no-console": "warn",
+    "semi": ["error", "never"]
   }
 }

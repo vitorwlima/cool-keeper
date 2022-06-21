@@ -12,50 +12,46 @@ type Props = {
   onDeletePassword?: () => void
 }
 
-export const PasswordForm: FC<Props> = ({ onSubmit, formRef, isLoading, currentPassword, onDeletePassword }) => {
+export const PasswordForm: FC<Props> = ({
+  onSubmit,
+  formRef,
+  isLoading,
+  currentPassword,
+  onDeletePassword,
+}) => {
   const initialData = currentPassword
     ? {
-      name: currentPassword.name,
-      login: currentPassword.login,
-      password: currentPassword.decrypted_password
-    }
+        name: currentPassword.name,
+        login: currentPassword.login,
+        password: currentPassword.decrypted_password,
+      }
     : {}
 
   return (
-    <Form className="flex flex-col gap-3" onSubmit={onSubmit} ref={formRef} initialData={initialData}>
-      <div className="form-control w-full">
-        <Input
-          name="name"
-          type="text"
-          placeholder="Platform X"
-          label="Name"
-        />
+    <Form
+      className='flex flex-col gap-3'
+      onSubmit={onSubmit}
+      ref={formRef}
+      initialData={initialData}
+    >
+      <div className='form-control w-full'>
+        <Input name='name' type='text' placeholder='Platform X' label='Name' />
       </div>
-      <div className="form-control w-full">
-        <Input
-          name="login"
-          type="text"
-          placeholder="john.doe@example.com"
-          label="Login"
-        />
+      <div className='form-control w-full'>
+        <Input name='login' type='text' placeholder='john.doe@example.com' label='Login' />
       </div>
-      <div className="form-control w-full">
-        <Input
-          name="password"
-          type="password"
-          placeholder="********"
-          label="Password"
-        />
+      <div className='form-control w-full'>
+        <Input name='password' type='password' placeholder='********' label='Password' />
       </div>
       <button
         className={`btn btn-primary mt-6 ${isLoading ? 'loading' : ''}`}
-        type="submit"
+        type='submit'
         disabled={isLoading}
       >
         Save
       </button>
       {!!currentPassword && (
-        <button className="btn btn-error" onClick={() => onDeletePassword!()} type="button">
+        <button className='btn btn-error' onClick={() => onDeletePassword!()} type='button'>
           Delete password
         </button>
       )}

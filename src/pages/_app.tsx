@@ -15,12 +15,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <title>Cool Keeper</title>
         <meta name='description' content='Password manager of the future' />
         <meta property='og:title' content='Cool Keeper' />
-        <meta
-          property='og:description'
-          content='Password manager of the future'
-        />
+        <meta property='og:description' content='Password manager of the future' />
         <meta property='og:type' content='website' />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <SessionProvider>
@@ -42,18 +39,18 @@ const getBaseUrl = () => {
 }
 
 export default withTRPC<AppRouter>({
-  config ({ ctx }) {
+  config({ ctx }) {
     const url = `${getBaseUrl()}/api/trpc`
 
     return {
       headers: () => {
         return {
-          cookie: ctx?.req?.headers.cookie
+          cookie: ctx?.req?.headers.cookie,
         }
       },
       url,
-      transformer: superjson
+      transformer: superjson,
     }
   },
-  ssr: true
+  ssr: true,
 })(MyApp)

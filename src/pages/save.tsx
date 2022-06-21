@@ -28,7 +28,7 @@ const SavePassword: NextPage = () => {
     },
     onSettled: () => {
       router.push('/')
-    }
+    },
   })
 
   const handleSubmit: SubmitHandler<FormData> = async (data) => {
@@ -38,7 +38,7 @@ const SavePassword: NextPage = () => {
       login,
       name,
       password,
-      userId: session?.user.id || ''
+      userId: session?.user.id || '',
     })
   }
 
@@ -50,10 +50,10 @@ const SavePassword: NextPage = () => {
       </Head>
 
       <main>
-        <section className="bg-primary text-primary-content flex flex-col items-center justify-center py-12">
-          <strong className="text-lg mt-2">Save new password</strong>
+        <section className='bg-primary text-primary-content flex flex-col items-center justify-center py-12'>
+          <strong className='text-lg mt-2'>Save new password</strong>
         </section>
-        <section className="p-4 max-w-5xl mx-auto">
+        <section className='p-4 max-w-5xl mx-auto'>
           <PasswordForm formRef={formRef} isLoading={isLoading} onSubmit={handleSubmit} />
         </section>
       </main>

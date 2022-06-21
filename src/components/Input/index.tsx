@@ -17,21 +17,25 @@ export const Input: FC<InputProps> = ({ name, label, ...rest }) => {
     registerField({
       name: fieldName,
       ref: inputRef,
-      getValue: ref => {
+      getValue: (ref) => {
         return ref.current.value
       },
       setValue: (ref, value) => {
         ref.current.value = value
       },
-      clearValue: ref => {
+      clearValue: (ref) => {
         ref.current.value = ''
-      }
+      },
     })
   }, [fieldName, registerField])
 
   return (
     <div>
-      {label && <label htmlFor={fieldName} className="label label-text">{label}</label>}
+      {label && (
+        <label htmlFor={fieldName} className='label label-text'>
+          {label}
+        </label>
+      )}
 
       <input
         id={fieldName}
@@ -41,7 +45,7 @@ export const Input: FC<InputProps> = ({ name, label, ...rest }) => {
         {...rest}
       />
 
-      {error && <p className="label-text mt-4 text-red-400">{error}</p>}
+      {error && <p className='label-text mt-4 text-red-400'>{error}</p>}
     </div>
   )
 }
