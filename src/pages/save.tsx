@@ -1,11 +1,10 @@
 import { FormHandles, SubmitHandler } from '@unform/core'
-import { Form } from '@unform/web'
 import type { GetServerSideProps, NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { Input } from 'src/components/Input'
+import { PasswordForm } from 'src/components/PasswordForm'
 import { notify } from 'src/utils/notify'
 import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 import { trpc } from 'src/utils/trpc'
@@ -55,39 +54,7 @@ const SavePassword: NextPage = () => {
           <strong className="text-lg mt-2">Save new password</strong>
         </section>
         <section className="p-4 max-w-5xl mx-auto">
-          <Form className="flex flex-col gap-3" onSubmit={handleSubmit} ref={formRef}>
-            <div className="form-control w-full">
-              <Input
-                name="name"
-                type="text"
-                placeholder="Platform X"
-                label="Name"
-              />
-            </div>
-            <div className="form-control w-full">
-              <Input
-                name="login"
-                type="text"
-                placeholder="john.doe@example.com"
-                label="Login"
-              />
-            </div>
-            <div className="form-control w-full">
-              <Input
-                name="password"
-                type="password"
-                placeholder="********"
-                label="Password"
-              />
-            </div>
-            <button
-              className={`btn btn-primary mt-6 ${isLoading ? 'loading' : ''}`}
-              type="submit"
-              disabled={isLoading}
-            >
-              Save
-            </button>
-          </Form>
+          <PasswordForm formRef={formRef} isLoading={isLoading} onSubmit={handleSubmit} />
         </section>
       </main>
     </>

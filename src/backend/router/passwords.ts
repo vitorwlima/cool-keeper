@@ -42,6 +42,30 @@ export const passwordsRouter = createRouter()
         }
       })
     }
+  }).mutation('update', {
+    input: z.object({
+      name: z.string(),
+      login: z.string(),
+      password: z.string(),
+      id: z.string()
+    }),
+    resolve: async ({ input }) => {
+      const cryptr = new Cryptr(process.env.PASSWORD_HASH!)
+      const { name, login, password, id } = input
+      const encryptedPassword = cryptr.encrypt(password)
+      const updatedPassword = await prisma.password.update({
+        where: {
+          id
+        },
+        data: {
+          encrypted_password: encryptedPassword,
+          name,
+          login
+        }
+      })
+      const decryptedPassword = cryptr.decrypt(updatedPassword.encrypted_password)
+      return { ...updatedPassword, decrypted_password: decryptedPassword }
+    }
   }).mutation('delete', {
     input: z.object({
       passwordId: z.string()
