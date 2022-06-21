@@ -25,10 +25,6 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
   const formRef = useRef<FormHandles>(null)
   const [editingPassword, setEditingPassword] = useState<Password | undefined>(undefined)
 
-  if (passwords.length === 0) {
-    return <p className="text-center text-xl">No saved passwords :(</p>
-  }
-
   const { mutate: deleteMutate } = trpc.useMutation('passwords.delete', {
     onSuccess: () => {
       setEditingPassword(undefined)
@@ -84,24 +80,26 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
           </button>
         </header>
         <ul className="flex flex-col gap-4 overflow-y-scroll max-h-[calc(100vh_-_306px)] pr-4 scrollbar-thumb-zinc-800 scrollbar-thin">
-          {passwords.map((password) => (
-            <li className="shadow-xl cursor-pointer" key={password.id} onClick={() => handleSetEditingPassword(password)}>
-              <div className="flex p-4 justify-between w-full">
-                <div>
-                  <h4 className="card-title">{password.name}</h4>
-                  <p>{password.login}</p>
+          {passwords.length
+            ? passwords.map((password) => (
+              <li className="shadow-xl cursor-pointer" key={password.id} onClick={() => handleSetEditingPassword(password)}>
+                <div className="flex p-4 justify-between w-full">
+                  <div>
+                    <h4 className="card-title">{password.name}</h4>
+                    <p>{password.login}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => handleCopyPassword(e, password.decrypted_password)}
+                    >
+                      <FiCopy />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    className="btn btn-primary"
-                    onClick={(e) => handleCopyPassword(e, password.decrypted_password)}
-                  >
-                    <FiCopy />
-                  </button>
-                </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))
+            : <p className="text-center text-xl">No saved passwords :(</p>}
         </ul>
       </section>
       {!!editingPassword &&

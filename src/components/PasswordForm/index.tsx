@@ -55,7 +55,7 @@ export const PasswordForm: FC<Props> = ({ onSubmit, formRef, isLoading, currentP
         Save
       </button>
       {!!currentPassword && (
-        <button className="btn btn-error" onClick={() => onDeletePassword!()}>
+        <button className="btn btn-error" onClick={() => onDeletePassword!()} type="button">
           Delete password
         </button>
       )}
