@@ -47,13 +47,11 @@ const SignIn: NextPage = () => {
       </Head>
 
       <main>
-        <section className='bg-primary text-primary-content flex flex-col items-center justify-center py-12'>
+        <section className='bg-primary text-primary-content flex flex-col items-center justify-center py-12 mb-12'>
           <strong className='text-4xl mt-2'>Cool Keeper</strong>
+          <h1 className='text-center mt-4 text-xl'>Sign in now</h1>
         </section>
-        <section>
-          <h1 className='text-center mt-4 mb-12 text-xl'>Sign in now</h1>
-        </section>
-        <section>
+        <section className='px-4'>
           <Form
             className='max-w-5xl mx-auto flex flex-col gap-2'
             ref={formRef}
