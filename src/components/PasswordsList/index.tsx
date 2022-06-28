@@ -66,7 +66,7 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
     <div className='flex gap-20'>
       <section className={`flex-1 lg:block ${editingPassword ? 'hidden' : ''}`}>
         <header className='flex items-center justify-between mb-8'>
-          <h2 className='font-semibold text-lg'>Passwords</h2>
+          <h2 className='font-semibold text-xl text-primary-content'>Passwords</h2>
           <button className='btn btn-primary' onClick={() => handleRedirectSaveNewPassword()}>
             Save new
           </button>
