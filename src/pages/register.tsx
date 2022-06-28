@@ -2,6 +2,7 @@ import { FormHandles, SubmitHandler } from '@unform/core'
 import { Form } from '@unform/web'
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { Input } from 'src/components/Input'
@@ -56,7 +57,7 @@ const Register: NextPage = () => {
       <main>
         <section className='bg-secondary text-secondary-content flex flex-col items-center justify-center py-12 mb-12'>
           <strong className='text-4xl mt-2'>Cool Keeper</strong>
-          <h1 className='text-center mt-4 text-xl'>Register now</h1>
+          <h1 className='text-center mt-4 text-xl'>Register</h1>
         </section>
         <section className='px-4'>
           <Form
@@ -79,6 +80,12 @@ const Register: NextPage = () => {
             >
               Create account
             </button>
+            <p className='text-center mt-4 text-secondary-content'>
+              Already have an account?{' '}
+              <Link href='/sign-in'>
+                <a className='link'>Sign in now</a>
+              </Link>
+            </p>
           </Form>
         </section>
       </main>

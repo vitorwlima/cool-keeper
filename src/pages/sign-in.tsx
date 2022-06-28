@@ -3,6 +3,7 @@ import { Form } from '@unform/web'
 import type { GetServerSideProps, NextPage } from 'next'
 import { signIn } from 'next-auth/react'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { Input } from 'src/components/Input'
 import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
@@ -49,7 +50,7 @@ const SignIn: NextPage = () => {
       <main>
         <section className='bg-primary text-primary-content flex flex-col items-center justify-center py-12 mb-12'>
           <strong className='text-4xl mt-2'>Cool Keeper</strong>
-          <h1 className='text-center mt-4 text-xl'>Sign in now</h1>
+          <h1 className='text-center mt-4 text-xl'>Sign in</h1>
         </section>
         <section className='px-4'>
           <Form
@@ -65,6 +66,12 @@ const SignIn: NextPage = () => {
             >
               Sign In
             </button>
+            <p className='text-center mt-4 text-primary-content'>
+              Don&apos;t have an account?{' '}
+              <Link href='/register'>
+                <a className='link'>Register now</a>
+              </Link>
+            </p>
           </Form>
         </section>
       </main>
