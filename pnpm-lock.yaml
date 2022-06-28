@@ -19,6 +19,7 @@ specifiers:
   autoprefixer: ^10.4.7
   axios: ^0.27.2
   bcrypt: ^5.0.1
+  classnames: ^2.3.1
   cryptr: ^6.0.3
   daisyui: ^2.15.4
   eslint: 8.0.1
@@ -56,6 +57,7 @@ dependencies:
   '@unform/web': 2.1.6_ef5jwxihqo6n7gxfmzogljlgcm
   axios: 0.27.2
   bcrypt: 5.0.1
+  classnames: 2.3.1
   cryptr: 6.0.3
   daisyui: 2.15.4_ugi4xkrfysqkt4c4y6hkyfj344
   next: 12.1.6_ef5jwxihqo6n7gxfmzogljlgcm
@@ -851,6 +853,10 @@ packages:
   /chownr/2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+    dev: false
+
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
     dev: false
 
   /clean-stack/2.2.0:
