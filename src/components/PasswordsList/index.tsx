@@ -71,7 +71,7 @@ export const PasswordsList: FC<Props> = ({ passwords }) => {
             Save new
           </button>
         </header>
-        <ul className='flex flex-col gap-4 overflow-y-scroll max-h-[calc(100vh_-_306px)] pr-4 scrollbar-thumb-zinc-800 scrollbar-thin'>
+        <ul className='flex flex-col gap-4 overflow-y-scroll max-h-[calc(100vh_-_306px)] px-4 scrollbar-thumb-zinc-800 scrollbar-thin'>
           {passwords.length ? (
             passwords.map((password) => (
               <PasswordCard
