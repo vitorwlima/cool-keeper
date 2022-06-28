@@ -35,7 +35,7 @@ export const PasswordCard: FC<Props> = ({ password, editPassword, active }) => {
         </div>
         <div className='flex gap-2'>
           <button
-            className='flex items-center justify-center p-1 text-neutral-content hover:text-primary-content'
+            className='flex items-center justify-center p-1 text-neutral-content hover:text-primary-content text-lg'
             onClick={(e) => handleCopyPassword(e, password.decrypted_password)}
           >
             <FiCopy />
