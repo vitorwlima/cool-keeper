@@ -10,10 +10,13 @@ generator client {
 }
 
 model Password {
-  id                 String @id @default(uuid())
-  name               String
-  login              String
-  encrypted_password String @db.Text
+  id                String @id @default(uuid())
+  name              String
+  login             String
+  encryptedPassword String @map("encrypted_password") @db.VarChar(512)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
   User   User   @relation(fields: [userId], references: [id])
   userId String
@@ -22,10 +25,16 @@ model Password {
 }
 
 model User {
-  id           String @id @default(uuid())
-  name         String
-  login        String @unique
-  passwordHash String @map("password_hash")
+  id                 String @id @default(uuid())
+  name               String
+  login              String @unique
+  passwordHash       String @map("password_hash")
+  masterPasswordHash String @unique @map("master_password_hash") @db.VarChar(512)
+  refreshToken       String @map("refresh_token")
+  masterToken        String @map("master_token")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
   passwords Password[]
 
