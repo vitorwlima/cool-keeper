@@ -27,7 +27,7 @@ model Password {
 model User {
   id                 String @id @default(uuid())
   name               String
-  login              String @unique
+  email              String @unique
   passwordHash       String @map("password_hash")
   masterPasswordHash String @unique @map("master_password_hash") @db.VarChar(512)
   refreshToken       String @map("refresh_token")
