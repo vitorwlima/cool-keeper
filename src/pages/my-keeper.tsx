@@ -1,12 +1,12 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { PasswordsList } from 'src/components/PasswordsList'
 import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 import { trpc } from 'src/utils/trpc'
 
 const MyKeeper: NextPage = () => {
-  const { data: session } = useSession()
+  // change everything down here
+  const { data: session } = { data: { user: { id: 'test-id' } } }
   const {
     data: passwords,
     isLoading,
@@ -17,9 +17,7 @@ const MyKeeper: NextPage = () => {
   if (!passwords || isLoading) return <div>Loading...</div>
 
   const handleLogout = async () => {
-    await signOut({
-      redirect: false,
-    })
+    // logout
 
     window.location.reload()
   }

@@ -34,7 +34,6 @@ The following tools were used in this project:
 - [Prisma](https://www.prisma.io/)
 - [tRPC](https://trpc.io/)
 - [Planetscale](https://planetscale.com/)
-- [NextAuth](https://next-auth.js.org/)
 
 ## :white_check_mark: Requirements ##
 

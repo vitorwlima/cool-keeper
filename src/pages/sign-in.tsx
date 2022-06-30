@@ -1,10 +1,9 @@
 import { FormHandles, SubmitHandler } from '@unform/core'
 import { Form } from '@unform/web'
 import type { GetServerSideProps, NextPage } from 'next'
-import { signIn } from 'next-auth/react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { Input } from 'src/components/Input'
 import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 
@@ -14,21 +13,14 @@ type FormData = {
 }
 
 const SignIn: NextPage = () => {
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
   const formRef = useRef<FormHandles>(null)
 
   const handleSubmit: SubmitHandler<FormData> = async (data) => {
-    const { email, password } = data
-    setIsLoggingIn(true)
+    // const { email, password } = data
     formRef.current?.setErrors({})
 
-    const res: any = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    })
-
-    setIsLoggingIn(false)
+    // login here
+    const res: any = { ok: true }
 
     if (res.ok) {
       window.location.reload()
@@ -60,10 +52,7 @@ const SignIn: NextPage = () => {
           >
             <Input type='text' placeholder='john.doe@example.com' name='email' label='E-mail' />
             <Input type='password' placeholder='********' name='password' label='Password' />
-            <button
-              type='submit'
-              className={`btn btn-primary w-full mt-8 ${isLoggingIn ? 'loading' : ''}`}
-            >
+            <button type='submit' className='btn btn-primary w-full mt-8'>
               Sign In
             </button>
             <p className='text-center mt-4 text-primary-content'>

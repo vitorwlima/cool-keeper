@@ -1,5 +1,4 @@
 import { withTRPC } from '@trpc/next'
-import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ToastContainer } from 'react-toastify'
@@ -20,10 +19,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <SessionProvider>
-        <Component {...pageProps} />
-        <ToastContainer />
-      </SessionProvider>
+      <Component {...pageProps} />
+      <ToastContainer />
     </>
   )
 }

@@ -1,6 +1,5 @@
 import { FormHandles, SubmitHandler } from '@unform/core'
 import type { GetServerSideProps, NextPage } from 'next'
-import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
@@ -18,7 +17,6 @@ type FormData = {
 const SavePassword: NextPage = () => {
   const router = useRouter()
   const formRef = useRef<FormHandles>(null)
-  const { data: session } = useSession()
   const trpcContext = trpc.useContext()
 
   const { mutate, isLoading } = trpc.useMutation('passwords.create', {
@@ -38,7 +36,6 @@ const SavePassword: NextPage = () => {
       login,
       name,
       password,
-      userId: session?.user.id || '',
     })
   }
 
