@@ -12,7 +12,7 @@ import { trpc } from 'src/utils/trpc'
 
 type FormData = {
   name: string
-  login: string
+  email: string
   password: string
   passwordConfirmation: string
 }
@@ -29,7 +29,7 @@ const Register: NextPage = () => {
   })
 
   const handleSubmit: SubmitHandler<FormData> = (data) => {
-    const { login, name, password, passwordConfirmation } = data
+    const { email, name, password, passwordConfirmation } = data
     formRef.current?.setErrors({})
 
     if (password !== passwordConfirmation) {
@@ -42,7 +42,7 @@ const Register: NextPage = () => {
 
     mutate({
       name,
-      login,
+      email,
       password,
     })
   }
@@ -65,7 +65,7 @@ const Register: NextPage = () => {
             ref={formRef}
             onSubmit={handleSubmit}
           >
-            <Input type='text' placeholder='john.doe@example.com' name='login' label='Login' />
+            <Input type='text' placeholder='john.doe@example.com' name='email' label='E-mail' />
             <Input type='text' placeholder='John Doe' name='name' label='Name' />
             <Input type='password' placeholder='********' name='password' label='Password' />
             <Input

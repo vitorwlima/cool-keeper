@@ -9,7 +9,7 @@ import { Input } from 'src/components/Input'
 import { setAuthLevelToRoute } from 'src/utils/setAuthLevelToRoute'
 
 type FormData = {
-  login: string
+  email: string
   password: string
 }
 
@@ -18,12 +18,12 @@ const SignIn: NextPage = () => {
   const formRef = useRef<FormHandles>(null)
 
   const handleSubmit: SubmitHandler<FormData> = async (data) => {
-    const { login, password } = data
+    const { email, password } = data
     setIsLoggingIn(true)
     formRef.current?.setErrors({})
 
     const res: any = await signIn('credentials', {
-      login,
+      email,
       password,
       redirect: false,
     })
@@ -36,7 +36,7 @@ const SignIn: NextPage = () => {
     }
 
     formRef.current?.setErrors({
-      password: 'Invalid login or password.',
+      password: 'Invalid email or password.',
     })
   }
 
@@ -58,7 +58,7 @@ const SignIn: NextPage = () => {
             ref={formRef}
             onSubmit={handleSubmit}
           >
-            <Input type='text' placeholder='john.doe@example.com' name='login' label='Login' />
+            <Input type='text' placeholder='john.doe@example.com' name='email' label='E-mail' />
             <Input type='password' placeholder='********' name='password' label='Password' />
             <button
               type='submit'
