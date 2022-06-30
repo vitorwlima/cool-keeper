@@ -17,7 +17,7 @@ export const passwordsRouter = createRouter()
       })
       const passwords = encryptedPasswords.map(pass => ({
         ...pass,
-        decrypted_password: cryptr.decrypt(pass.encrypted_password),
+        decrypted_password: cryptr.decrypt(pass.encryptedPassword),
       }))
 
       return passwords
@@ -35,7 +35,7 @@ export const passwordsRouter = createRouter()
       const encryptedPassword = cryptr.encrypt(password)
       await prisma.password.create({
         data: {
-          encrypted_password: encryptedPassword,
+          encryptedPassword,
           name,
           login,
           userId,
@@ -58,12 +58,12 @@ export const passwordsRouter = createRouter()
           id,
         },
         data: {
-          encrypted_password: encryptedPassword,
+          encryptedPassword,
           name,
           login,
         },
       })
-      const decryptedPassword = cryptr.decrypt(updatedPassword.encrypted_password)
+      const decryptedPassword = cryptr.decrypt(updatedPassword.encryptedPassword)
       return { ...updatedPassword, decrypted_password: decryptedPassword }
     },
   }).mutation('delete', {
